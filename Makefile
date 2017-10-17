@@ -10,6 +10,6 @@ user:
 	gcc -o user user.c
 
 clean:
-	rm oss
-	rm user
-	rm *.out
+	rm -f oss
+	rm -f user
+	rm -f *.out
