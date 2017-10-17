@@ -1,5 +1,4 @@
 #include "clock.h"
-//#include "restart.h"
 
 void printHelpMenu();
 void killAllProcesses();
@@ -132,16 +131,14 @@ int main(int argc, char* argv[]) {
 	}
 	
 	while(1) {
-		//printf("1st statement in while loop, index=%d, slaveProcesses=%d, termination=%d\n",
-		//index, slaveProcesses, z);
 		if((index < slaveProcesses) && (z < 100)) {
-			printf("About to fork\n");
+//			printf("About to fork\n");
 			pid = fork();
 			totalProcesses++;
 			index++;
 			
 			if (pid == 0) {
-				printf("About to exec to child process\n");
+//				printf("About to exec to child process\n");
 				char *id;
 				sprintf(id, "%i", index);
 				execl(PATH, id, filename, (char *)NULL);

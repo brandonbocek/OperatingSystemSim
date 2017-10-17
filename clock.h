@@ -36,7 +36,7 @@ void printerror(char *msg, int error);
 int removeSemaphore(int msgid);
 int removeMessageQueue(int msgid);
 int detachandremove(int shmid, void *shmaddr);
-
+void removeAll();
 
 /*  The virtual clock */
 struct SharedMemory {

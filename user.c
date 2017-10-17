@@ -2,12 +2,12 @@
 
 int msgid, msgid_two, shmid;
 struct SharedMemory *shm;
+int semid;
 
 int main(int argc, char* argv[]) {
 
 	int error;
 	int i, j, n;
-	int semid;
 	struct sembuf semwait[1];
 	struct sembuf semsignal[1];
 	struct sembuf sem;
@@ -96,7 +96,7 @@ int main(int argc, char* argv[]) {
 		printerror("Failed to clean up", error);
 		return 1;
 	}	
-	
+	removeSemaphore(semid);	
 	shmdt(shm);
 	exit(3);
 }
@@ -121,6 +121,10 @@ int r_semop(int semid, struct sembuf *sops, int nsops) {
 	return 0;
 }
 
+int removeSemaphore(int semid) {
+	return semctl(semid, 0, IPC_RMID);
+}
+
 pid_t r_wait(int *stat_loc) {
 	pid_t retval;
 	while (((retval = wait(stat_loc)) == -1) && (errno == EINTR)) ;
@@ -139,4 +143,3 @@ void signalHandler() {
 	killpg(id, SIGINT);
 	exit(EXIT_SUCCESS);
 }
-

@@ -1,0 +1,39 @@
+Brandon Bocek
+10/17/2017
+CS 4760
+Project 3
+
+To compile: type 'make' or 'make all'
+
+To run: type   './oss'
+			or './oss -h'
+			or './oss -s #slave processes to spawn'
+			or './oss -l file to write to'
+			or './oss -t #seconds until termination'
+
+Overview:
+	The master process in oss.c checks for command
+	line arguments and makes adjustments to some variables.
+	Set message buffers to send and receive a message between
+	the oss and user. Then the file pointer is set for the
+	right file and the time is put into shared memory.
+	The semaphore is initialized, the child processes are
+	forked and run with exec. The child processes generate a random
+	amount of nanoseconds to wait. Then they wait with the 
+	semaphore before they in the critical section and signal when
+	they have finished for the next child process to do enter the CS.
+
+Other Notes:
+	I'm aware the clock is not exactly correct.
+	You will notice that I don't set an increment.
+	I spent too much time trying to get the semaphores
+	right.
+
+WARNING:
+	I had a problem with semaphores not
+	deleting after the whole program ends.
+	I added removeSemaphore() in user.c to remove
+	semaphores in the necessary places so there
+	should not be a problem with this taking up
+	the memory in Hoare.
+	
